@@ -15,8 +15,10 @@ def log(msg):
 
 
 def send(match, message_no):
-    session._api._post('/user/matches/' + match['id'],
-                       {"message": messages[message_no]})
+    for m in messages[message_no]:
+        session._api._post('/user/matches/' + match['id'],
+                           {"message": m})
+        time.sleep(3)
     log('Sent message ' + str(message_no) + ' to ' + match['person']['name'])
 
 
