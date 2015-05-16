@@ -2,15 +2,46 @@ import pynder
 import config
 import time
 import datetime
-import urllib3
+import requests
+from messages import messages
 
-urllib3.disable_warnings() # Find way around this...
+requests.packages.urllib3.disable_warnings()  # Find way around this...
 
 session = pynder.Session(config.FACEBOOK_ID, config.FACEBOOK_AUTH_TOKEN)
 
 
 def log(msg):
     print '[' + str(datetime.datetime.now()) + ']' + ' ' + msg
+
+
+def send(match, message_no):
+    session._api._post('/user/matches/' + match['id'],
+                       {"message": messages[message_no]})
+    log('Sent message ' + str(message_no) + ' to ' + match['person']['name'])
+
+
+def message(match):
+    ms = match['messages']
+    khaled = session.profile.id
+    if not ms:
+        send(match, 0)
+        return
+    said = False
+    count = 0
+    name = match['person']['name']
+    for m in ms:
+        if m['from'] == khaled:
+            count += 1
+            said = False
+        elif 'dj khaled' in m['message'].lower():
+            said = True
+    if count >= len(messages):
+        log('Finished conversation with ' + name)
+        return
+    if said:
+        send(match, count)
+    else:
+        log('No new messages from ' + name)
 
 
 def handle_likes():
@@ -29,6 +60,9 @@ def handle_likes():
 
 def handle_matches():
     log(str(len(session._api.matches())) + ' matches')
+    matches = session._api.matches()
+    for m in matches:
+        message(m)
 
 
 while True:
