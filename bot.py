@@ -2,6 +2,9 @@ import pynder
 import config
 import time
 import datetime
+import urllib3
+
+urllib3.disable_warnings() # Find way around this...
 
 session = pynder.Session(config.FACEBOOK_ID, config.FACEBOOK_AUTH_TOKEN)
 
