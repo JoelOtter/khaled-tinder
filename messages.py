@@ -13,6 +13,11 @@ messages = [
         u'''Baby, let the music take control.
 Let we the best sound take control, baby - hold on, say my name?'''
     ],
-    [u'''S'right. That's right, baby. You remember that.
-https://youtu.be/fxPBu_vX9Q0''']
+    [
+        u'''S'right. That's right, baby. You remember that.
+https://youtu.be/fxPBu_vX9Q0''',
+        u'''Thanks for playing!
+
+Confused? http://joelotter.com/2015/05/17/dj-khaled-tinder-bot.html'''
+    ]
 ]
