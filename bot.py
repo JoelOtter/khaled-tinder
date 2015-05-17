@@ -52,7 +52,7 @@ def handle_likes():
             users = session.nearby_users()
             for u in users:
                 if u.name == 'Tinder Team':
-                    log('Out of swipes, pausing one hour...')
+                    log('Out of swipes.')
                     return
                 u.like()
                 log('Liked ' + u.name)
@@ -70,4 +70,5 @@ def handle_matches():
 while True:
     handle_likes()
     handle_matches()
-    time.sleep(3600)
+    log('Pausing for ten minutes...')
+    time.sleep(600)
