@@ -68,6 +68,6 @@ def handle_matches():
 
 
 while True:
-    handle_matches()
     handle_likes()
+    handle_matches()
     time.sleep(3600)
