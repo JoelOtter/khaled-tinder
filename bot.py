@@ -58,6 +58,8 @@ def handle_likes():
                 log('Liked ' + u.name)
         except ValueError:
             continue
+        except pynder.errors.RequestError:
+            continue
 
 
 def handle_matches():
